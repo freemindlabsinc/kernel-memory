@@ -21,6 +21,7 @@ using Microsoft.KernelMemory.MemoryStorage;
 using Microsoft.KernelMemory.Service;
 using Microsoft.KernelMemory.WebService;
 using Microsoft.OpenApi.Models;
+using FreeMindLabs.KernelMemory.Elasticsearch;
 
 // ********************************************************
 // ************** APP SETTINGS ****************************
@@ -85,9 +86,15 @@ if (config.Service.RunWebService)
 
 // Inject memory client and its dependencies
 // Note: pass the current service collection to the builder, in order to start the pipeline handlers
+var esConfig = config.GetServiceConfig<ElasticsearchConfig>(appBuilder.Configuration, "ElasticsearchVectorDb");
 IKernelMemory memory = new KernelMemoryBuilder(appBuilder.Services)
     .FromAppSettings()
     // .With...() // in case you need to set something not already defined by `.FromAppSettings()`
+    .WithElasticsearch(
+        endpoint: esConfig.Endpoint,
+        userName: esConfig.UserName,
+        password: esConfig.Password,
+        certificateFingerPrint: esConfig.CertificateFingerPrint)
     .Build();
 
 appBuilder.Services.AddSingleton(memory);
