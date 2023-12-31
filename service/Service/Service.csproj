@@ -28,10 +28,21 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="FreeMindLabs.KernelMemory.Elasticsearch" Version="0.7.2" />
-        <PackageReference Include="Microsoft.KernelMemory.Core" Version="0.23.231224.1" />
-        <PackageReference Include="Microsoft.KernelMemory.Postgres" Version="0.3.231224.1" />    
+        <!-- Microsoft.KernelMemory.Core includes all Azure extensions and extensions without external dependencies -->
+        <PackageReference Include="Microsoft.KernelMemory.Core" Version="0.24.231228.5" />
+        <!-- These extensions are used by ServiceConfiguration to support third party dependencies -->
+        <PackageReference Include="Microsoft.KernelMemory.Orchestration.RabbitMQ" Version="0.24.231228.5" />
+        <PackageReference Include="Microsoft.KernelMemory.AI.LlamaSharp" Version="0.24.231228.5" />
+        <PackageReference Include="Microsoft.KernelMemory.MemoryDb.Postgres" Version="0.24.231228.5" />
+        <PackageReference Include="FreeMindLabs.KernelMemory.Elasticsearch" Version="0.7.2" />          
     </ItemGroup>
+
+<!--    <ItemGroup>-->
+<!--        <ProjectReference Include="..\Core\Core.csproj"/>-->
+<!--        <ProjectReference Include="..\..\extensions\LlamaSharp\LlamaSharp.csproj"/>-->
+<!--        <ProjectReference Include="..\..\extensions\Postgres\Postgres\Postgres.csproj"/>-->
+<!--        <ProjectReference Include="..\..\extensions\RabbitMQ\RabbitMQ.csproj"/>-->
+<!--    </ItemGroup>-->
 
     <!-- Code Analysis -->
     <ItemGroup>
