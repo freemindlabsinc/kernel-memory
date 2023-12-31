@@ -24,13 +24,13 @@
         }
     -->
     <ItemGroup>
-        <ProjectReference Include="..\..\tools\InteractiveSetup\InteractiveSetup.csproj"/>
+        <ProjectReference Include="..\..\tools\InteractiveSetup\InteractiveSetup.csproj" />
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="FreeMindLabs.KernelMemory.Elasticsearch" Version="0.7.2" />
         <PackageReference Include="Microsoft.KernelMemory.Core" Version="0.23.231224.1" />
-        <PackageReference Include="Microsoft.KernelMemory.Postgres" Version="0.3.231224.1" />
-        <PackageReference Include="FreeMindLabs.KernelMemory.Elasticsearch" Version="0.6.2"/>    
+        <PackageReference Include="Microsoft.KernelMemory.Postgres" Version="0.3.231224.1" />    
     </ItemGroup>
 
     <!-- Code Analysis -->

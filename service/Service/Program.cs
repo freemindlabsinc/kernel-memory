@@ -114,6 +114,13 @@ Console.WriteLine($"* Embedding generation: {app.Services.GetService<ITextEmbedd
 Console.WriteLine($"* Text generation     : {app.Services.GetService<ITextGenerator>()?.GetType().FullName}");
 Console.WriteLine("***************************************************************************************************************************");
 
+var memDb = app.Services.GetService<IMemoryDb>();
+if (memDb is ElasticsearchMemory esMemDb)
+{
+    var indices = await esMemDb.GetIndexesAsync();
+    Console.WriteLine($"* Elasticsearch      : {string.Join(", ", indices)}");
+}
+
 // ********************************************************
 // ************** WEB SERVICE ENDPOINTS *******************
 // ********************************************************
@@ -355,8 +362,6 @@ if (config.Service.RunWebService)
         .Produces<ProblemDetails>(StatusCodes.Status403Forbidden)
         .Produces<ProblemDetails>(StatusCodes.Status404NotFound);
 }
-#pragma warning restore CA1031
-#pragma warning restore CA2254
 
 // ********************************************************
 // ************** START ***********************************
